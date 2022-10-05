@@ -1,0 +1,64 @@
+import pandas as pd
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+import models
+import data
+
+valx = data.valx
+valy = data.valy
+test = data.test
+
+#Model predictions
+
+valpred1 = models.model1.predict(valx)
+pred1 = models.model1.predict(test)
+
+valpred2 = models.model2.predict(valx)
+pred2 = models.model2.predict(test)
+
+valpred3 = models.model3.predict(valx)
+pred3 = models.model3.predict(test)
+
+valpred4 = models.model4.predict(valx)
+pred4 = models.model4.predict(test)
+
+valpred5 = models.model5.predict(valx)
+pred5 = models.model5.predict(test)
+
+valpred6 = models.model6.predict(valx)
+pred6 = models.model6.predict(test)
+
+valpred7 = models.model7.predict(valx)
+pred7 = models.model7.predict(test)
+
+valpred8 = models.model8.predict(valx)
+pred8 = models.model8.predict(test)
+
+valpred9 = models.model9.predict(valx)
+pred9 = models.model9.predict(test)
+
+valpred10 = models.model10.predict(valx)
+pred10 = models.model10.predict(test)
+
+#Stacking using SVM
+
+colname = ['model2','model3','model15','model18','model22','model26','model30','model31','model32','model14']
+x = pd.concat([pd.DataFrame(valpred1),pd.DataFrame(valpred2),pd.DataFrame(valpred3),pd.DataFrame(valpred4),pd.DataFrame(valpred5),
+               pd.DataFrame(valpred6),pd.DataFrame(valpred7),pd.DataFrame(valpred8),pd.DataFrame(valpred9),pd.DataFrame(valpred10)],axis=1)
+y=valy.values.reshape(valy.shape[0],)
+
+svc = SVC(kernel='rbf',probability=True)
+param_grid2 = {'C':[0.1],'gamma':[0.03,0.035,0.04]}
+stack = GridSearchCV(svc,param_grid2,scoring = 'roc_auc', cv=10)
+stack.fit(x,y)
+
+testx = pd.concat([pd.DataFrame(pred1),pd.DataFrame(pred2),pd.DataFrame(pred3),pd.DataFrame(pred4),pd.DataFrame(pred5),
+                   pd.DataFrame(pred6),pd.DataFrame(pred7),pd.DataFrame(pred8),pd.DataFrame(pred9),pd.DataFrame(pred10)],axis=1)
+testx.columns=colname
+finalpred = stack.best_estimator_.predict_proba(testx)[:,1]
+
+#Final Output
+
+finalpred = pd.concat([pd.DataFrame(list(range(133223))),pd.DataFrame(finalpred)],axis=1)
+finalpred.columns = ["sample_id","malware"]
+finalpred.to_csv("predictions.csv",index=False,header=True)

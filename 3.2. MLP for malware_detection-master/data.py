@@ -1,0 +1,48 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import scale
+from random import sample
+
+#read files
+trainraw = pd.read_csv("train.csv", header=None,names= list(range(1025)),usecols= list(range(1025)))
+label = pd.read_csv("train_label.csv",usecols= [1])
+testraw = pd.read_csv("test.csv", header=None, names= list(range(1025)),usecols= list(range(1025)))
+
+#concatenate train and test to be processed together
+datax = pd.concat([trainraw, testraw], axis=0)
+
+#fill Nas with -1
+datax = datax.fillna(-1)
+
+#determine if sample has length longer than 1024
+for i in range (datax.shape[0]):
+    if datax.iloc[i,1024] == -1:
+        datax.iloc[i,1024] = 0
+    
+    else:
+        datax.iloc[i,1024] = 1
+
+#drop columns that have only 1 valye
+droplist =[]
+for i in range (1025):
+    if len(np.unique(datax[i])) == 1: 
+        droplist.append(i)
+
+keeplist = list(set(range(1025))-set(droplist))
+dataxx = datax[keeplist]
+
+#normalize data
+totalx = pd.DataFrame(scale(dataxx))
+
+#split train and test data
+trainallx = totalx.iloc[:113636,:]
+test = totalx.iloc[113636:,:]
+
+#split training and validation set from train data
+train_index = sample(list(set(range(113636))), 80000)
+trainx = trainallx.iloc[train_index,:]
+trainy = label.iloc[train_index,:]
+
+val_index = list(set(range(113636)) - set(train_index))
+valx = trainallx.iloc[val_index,:]
+valy = label.iloc[val_index,:]

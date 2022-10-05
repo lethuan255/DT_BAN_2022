@@ -1,0 +1,510 @@
+from keras.models import Sequential
+from keras.layers import Activation,Dense,BatchNormalization
+from keras import metrics
+from keras.optimizers import Adam
+from keras.regularizers import l2
+
+#global parameters
+Initializer = 'he_normal'
+activation = Activation('sigmoid')
+Regularizer = l2
+
+lrate = 0.0001
+adam = Adam(lr=lrate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+
+#####################################################################################################################                
+
+# model 1
+regparam1 = 0.00005
+
+model1 = Sequential()
+
+model1.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1),input_dim=1023))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(256,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(32,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(16,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(8,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam1)))
+model1.add(BatchNormalization())
+model1.add(activation)
+
+model1.add(Dense(1,kernel_initializer=Initializer))
+model1.add(Activation('sigmoid'))
+   
+model1.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+# model 2
+regparam2 = 0.00005
+
+model2 = Sequential()
+
+model2.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2),input_dim=1023))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(256,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(32,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(16,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(8,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam2)))
+model2.add(BatchNormalization())
+model2.add(activation)
+
+model2.add(Dense(1,kernel_initializer=Initializer))
+model2.add(Activation('sigmoid'))
+
+model2.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+# model 3
+regparam3 = 0.00001
+
+model3 = Sequential()
+
+model3.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3),input_dim=1023))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(256,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(256,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(16,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(16,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam3)))
+model3.add(BatchNormalization())
+model3.add(activation)
+
+model3.add(Dense(1,kernel_initializer=Initializer))
+model3.add(Activation('sigmoid'))
+
+model3.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam4 = 0.0001
+
+model4 = Sequential()
+
+model4.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4),input_dim=1023))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(256,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam4)))
+model4.add(BatchNormalization())
+model4.add(activation)
+
+model4.add(Dense(1,kernel_initializer=Initializer))
+model4.add(Activation('sigmoid'))
+
+model4.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam5 = 0.00005
+
+model5 = Sequential()
+
+model5.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5),input_dim=1023))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5)))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5)))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5)))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5)))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam5)))
+model5.add(BatchNormalization())
+model5.add(activation)
+
+model5.add(Dense(1,kernel_initializer=Initializer))
+model5.add(Activation('sigmoid'))
+
+model5.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam6 = 0.00005
+
+model6 = Sequential()
+
+model6.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6),input_dim=1023))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam6)))
+model6.add(BatchNormalization())
+model6.add(activation)
+
+model6.add(Dense(1,kernel_initializer=Initializer))
+model6.add(Activation('sigmoid'))
+
+model6.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam7 = 0.00005
+
+model7 = Sequential()
+
+model7.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7),input_dim=1023))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam7)))
+model7.add(BatchNormalization())
+model7.add(activation)
+
+model7.add(Dense(1,kernel_initializer=Initializer))
+model7.add(Activation('sigmoid'))
+
+model7.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam8 = 0.00005
+
+model8 = Sequential()
+
+model8.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8),input_dim=1023))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(1023,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam8)))
+model8.add(BatchNormalization())
+model8.add(activation)
+
+model8.add(Dense(1,kernel_initializer=Initializer))
+model8.add(Activation('sigmoid'))
+
+model8.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam9 = 0.00005
+
+model9 = Sequential()
+
+model9.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9),input_dim=1023))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam9)))
+model9.add(BatchNormalization())
+model9.add(activation)
+
+model9.add(Dense(1,kernel_initializer=Initializer))
+model9.add(Activation('sigmoid'))
+
+model9.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])
+
+#####################################################################################################################                
+
+regparam10 = 0.00005
+
+model10 = Sequential()
+
+model10.add(Dense(512,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10),input_dim=1023))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(128,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(64,kernel_initializer=Initializer,kernel_regularizer=Regularizer(regparam10)))
+model10.add(BatchNormalization())
+model10.add(activation)
+
+model10.add(Dense(1,kernel_initializer=Initializer))
+model10.add(Activation('sigmoid'))
+
+model10.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics = ['accuracy'])

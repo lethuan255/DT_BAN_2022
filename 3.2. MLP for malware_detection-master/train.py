@@ -1,0 +1,153 @@
+import numpy as np
+from keras.callbacks import Callback
+from sklearn.metrics import f1_score, precision_score, roc_auc_score
+from keras.callbacks import LearningRateScheduler
+import data
+import models
+
+trainx = data.trainx
+trainy = data.trainy
+valx = data.valx
+valy = data.valy
+
+# Other metrics 
+class Metrics(Callback):
+    def on_train_begin(self, logs={}):
+     self.val_f1s = []
+     self.val_auc = []
+     self.val_precisions = []
+
+    def on_epoch_end(self, epoch, logs={}):
+     val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
+     val_prob = (np.asarray(self.model.predict(self.validation_data[0])))
+     val_targ = self.validation_data[1]
+     _val_f1 = f1_score(val_targ, val_predict)
+     _val_auc = roc_auc_score(val_targ, val_prob)
+     _val_precision = precision_score(val_targ, val_predict)
+     self.val_f1s.append(_val_f1)
+     self.val_auc.append(_val_auc)
+     self.val_precisions.append(_val_precision)
+     print (" — val_f1: %f — val_precision: %f — val_auc %f" %(_val_f1, _val_precision, _val_auc))
+     return
+ 
+metrics = Metrics()
+
+#Learning rate decay
+lrate = 0.0001
+def lr_sch(epoch):
+    if epoch % 2 ==0:
+        return lrate*0.1
+    else:
+        return lrate
+lrsch = LearningRateScheduler(lr_sch)
+
+#model 1
+model1fit = models.model1.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+
+#model 2
+model2fit = models.model2.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 3
+model3fit = models.model3.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 4
+model4fit = models.model4.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 5
+model5fit = models.model5.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 6
+model6fit = models.model6.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 7
+model7fit = models.model7.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 8
+model8fit = models.model8.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 9
+model9fit = models.model9.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
+
+#model 10
+model10fit = models.model10.fit(
+        trainx,
+        trainy,
+        epochs=101,
+        batch_size=32,
+        verbose=1,
+        validation_data = (valx,valy),
+        callbacks=[metrics,lrsch]
+        )
